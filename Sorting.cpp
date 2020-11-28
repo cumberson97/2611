@@ -17,7 +17,7 @@ int main () {
     double elapsed;
     int i=1;
     clock_t start, end;
-
+    Unsorted_Data_Test(array,data_Set_Size,elapsed,start,end);
 
 
 	// write code here to perform experiments with the sort algorithms
@@ -39,35 +39,37 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     int i=1;
 
     cout<<"***Selection Sort***"<<endl;
-    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size+=100000) {
+    for(Data_Set_Size=10000; elapsed<=180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
             break;
         }
         data_set(arr, Data_Set_Size);
         start = clock();
-        quickSort(arr,0,Data_Set_Size);
+        selectionSort(arr,Data_Set_Size);
         end = clock();
         elapsed = double(end - start) / CLOCKS_PER_SEC;
-        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
         i++;
     }
+    i=1;
 
-    cout<<"***Bubble Sort***"<<endl;
-    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size+=100000) {
+    cout<<endl<<"***Bubble Sort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
             break;
         }
         data_set(arr, Data_Set_Size);
         start = clock();
-        quickSort(arr,0,Data_Set_Size);
+        bubbleSort(arr,Data_Set_Size);
         end = clock();
         elapsed = double(end - start) / CLOCKS_PER_SEC;
-        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
         i++;
     }
+    i=1;
 
-    cout<<"***Insertion In Plcae***"<<endl;
-    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size+=100000) {
+    cout<<endl<<"***Insertion In Plcae***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -76,7 +78,37 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         insertionSort(arr,Data_Set_Size);
         end = clock();
         elapsed = double(end - start) / CLOCKS_PER_SEC;
-        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+
+    cout<<endl<<"***MergeSort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        mergeSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+
+    cout<<endl<<"***QuickSort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        quickSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
         i++;
     }
 }

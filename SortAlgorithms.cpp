@@ -78,59 +78,55 @@ void insertionSort (int A[], int lengthA) {
 
 
 
-int merge (int A[], int p, int q, int r) {
-	int n1, n2;
-	//int b[1000], c[1000];
-	
-	static int * b = new int [100000000];
-	static int * c = new int [100000000];
-	
-	n1 = q - p + 1;
-	n2 = r - q;
-	
-	for (int k=0; k<n1; k++)
-		b[k] = A[k+p];
+void merge (int A[], int p, int q, int r) {
+    int n1, n2;
+    int b[1000], c[1000];
 
-	b[n1] = INT_MAX; 
-	
-	for (int k=0; k<n2; k++)
-		c[k] = A[q+k+1];		
-	
-	c[n2] = INT_MAX;
-	
-	int i, j;
-	
-	i = 0;
-	j = 0;
-	
-	for (int k=p; k<=r; k++) {
-		if (b[i] < c[j]) {
-			A[k] = b[i];
-			i++;
-		}
-		else {
-			A[k] = c[j];
-			j++;
-		}
-	}
-	return j;
-	//delete b;
-	//delete c;
-}	
+    n1 = q - p + 1;
+    n2 = r - q;
+
+    for (int k=0; k<n1; k++)
+        b[k] = A[k+p];
+
+    b[n1] = INT_MAX;
+
+    for (int k=0; k<n2; k++)
+        c[k] = A[q+k+1];
+
+    c[n2] = INT_MAX;
+
+    int i, j;
+
+    i = 0;
+    j = 0;
+
+    for (int k=p; k<=r; k++) {
+        if (b[i] < c[j]) {
+            A[k] = b[i];
+            i++;
+        }
+        else {
+            A[k] = c[j];
+            j++;
+        }
+    }
+
+}
 
 
 
 void mergeSort (int A[], int start, int end) {
-	int mid;
-	
-	if (start < end) {
-		mid = (start + end) / 2;
-		mergeSort (A, start, mid);
-		mergeSort (A, mid+1, end);
-		merge (A, start, mid, end);
-	}
-	
+    int mid;
+
+    if (start < end) {
+        mid = (start + end) / 2;
+        mergeSort (A, start, mid);
+        mergeSort (A, mid+1, end);
+        merge (A, start, mid, end);
+    }
+
 }
+
 
 
 
