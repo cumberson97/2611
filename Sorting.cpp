@@ -18,15 +18,7 @@ int main () {
     int i=1;
     clock_t start, end;
 
-    for(data_Set_Size=10000; elapsed<180;data_Set_Size+=100000) {
-        start = clock();
-        data_set(array, data_Set_Size);
-        quickSort(array,0,data_Set_Size);
-        end = clock();
-        elapsed = double(end - start) / CLOCKS_PER_SEC;
-        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
-        i++;
-    }
+
 
 	// write code here to perform experiments with the sort algorithms
 	
@@ -44,7 +36,49 @@ void data_set (int a[],int data_set_size){
     }
 }
 void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
+    int i=1;
 
+    cout<<"***Selection Sort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size+=100000) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        quickSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
+        i++;
+    }
+
+    cout<<"***Bubble Sort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size+=100000) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        quickSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
+        i++;
+    }
+
+    cout<<"***Insertion In Plcae***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size+=100000) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        insertionSort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<data_Set_Size<<endl;
+        i++;
+    }
 }
 void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
 
