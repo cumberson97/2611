@@ -17,7 +17,6 @@ int main () {
     double elapsed;
     int i=1;
     clock_t start, end;
-    elapsed=0;
 
     Unsorted_Data_Test(array,data_Set_Size,elapsed,start,end);
     Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
@@ -225,6 +224,37 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
         i++;
     }
+    i=1;
+    elapsed=0;
+    cout<<endl<<"***RadixSort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        radixsort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    elapsed =0;
+    Data_Set_Size=Data_Set_Size/4;
+    quat = Data_Set_Size/4;
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        radixsort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
 }
 //Carson
 void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
@@ -315,6 +345,21 @@ void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,c
         }
         start = clock();
         heapSort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+    data_set(arr, full);
+    elapsed=0;
+    cout<<endl<<"***RadixSort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        start = clock();
+        radixsort(arr,Data_Set_Size);
         end = clock();
         elapsed = double(end - start) / CLOCKS_PER_SEC;
         cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
