@@ -17,7 +17,10 @@ int main () {
     double elapsed;
     int i=1;
     clock_t start, end;
+    elapsed=0;
+
     Unsorted_Data_Test(array,data_Set_Size,elapsed,start,end);
+    Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
 
 
 	// write code here to perform experiments with the sort algorithms

@@ -80,8 +80,8 @@ void insertionSort (int A[], int lengthA) {
 
 void merge (int A[], int p, int q, int r) {
     int n1, n2;
-    int b[1000], c[1000];
-
+    static int * b = new int [1000000000];
+    static int * c = new int [1000000000];
     n1 = q - p + 1;
     n2 = r - q;
 
