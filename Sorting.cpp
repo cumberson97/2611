@@ -33,7 +33,7 @@ void data_set (int a[],int data_set_size){
     long long int numbers;
     random_device rd;
     default_random_engine generator(rd());
-    uniform_int_distribution<long long unsigned>distribution(0,100000000);
+    uniform_int_distribution<long long unsigned>distribution(0,1000000000);
     for (int i=1; i < data_set_size; i++){
         a[i]= distribution(generator);
     }
@@ -55,9 +55,10 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     elapsed =0;
-    Data_Set_Size/=2;
+    Data_Set_Size=(Data_Set_Size/4);
     float quat = Data_Set_Size/4;
-    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -85,9 +86,10 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     elapsed =0;
-    Data_Set_Size/=2;
+    Data_Set_Size=Data_Set_Size/4;
     quat = Data_Set_Size/4;
-    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -115,9 +117,10 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     elapsed =0;
-    Data_Set_Size/=2;
+    Data_Set_Size=Data_Set_Size/4;
     quat = Data_Set_Size/4;
-    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -145,9 +148,10 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     elapsed =0;
-    Data_Set_Size/=2;
+    Data_Set_Size=Data_Set_Size/4;
     quat = Data_Set_Size/4;
-    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -175,9 +179,10 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     elapsed =0;
-    Data_Set_Size/=2;
+    Data_Set_Size=Data_Set_Size/4;
     quat = Data_Set_Size/4;
-    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -205,9 +210,10 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     elapsed =0;
-    Data_Set_Size/=2;
+    Data_Set_Size=Data_Set_Size/4;
     quat = Data_Set_Size/4;
-    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
+    Data_Set_Size = Data_Set_Size+quat;
+    for(Data_Set_Size=Data_Set_Size;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
