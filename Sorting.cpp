@@ -56,7 +56,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
     elapsed =0;
     Data_Set_Size/=2;
-    for(Data_Set_Size+=(Data_Set_Size/2);elapsed<=180;Data_Set_Size=(Data_Set_Size/2)+Data_Set_Size){
+    float quat = Data_Set_Size/4;
+    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -85,7 +86,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
     elapsed =0;
     Data_Set_Size/=2;
-    for(Data_Set_Size+=(Data_Set_Size/2);elapsed<=180;Data_Set_Size=(Data_Set_Size/2)+Data_Set_Size){
+    quat = Data_Set_Size/4;
+    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -114,7 +116,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
     elapsed =0;
     Data_Set_Size/=2;
-    for(Data_Set_Size+=(Data_Set_Size/2);elapsed<=180;Data_Set_Size=(Data_Set_Size/2)+Data_Set_Size){
+    quat = Data_Set_Size/4;
+    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -143,7 +146,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
     elapsed =0;
     Data_Set_Size/=2;
-    for(Data_Set_Size+=(Data_Set_Size/2);elapsed<=180;Data_Set_Size=(Data_Set_Size/2)+Data_Set_Size){
+    quat = Data_Set_Size/4;
+    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -172,7 +176,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
     elapsed =0;
     Data_Set_Size/=2;
-    for(Data_Set_Size+=(Data_Set_Size/2);elapsed<=180;Data_Set_Size=(Data_Set_Size/2)+Data_Set_Size){
+    quat = Data_Set_Size/4;
+    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
@@ -201,7 +206,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
     elapsed =0;
     Data_Set_Size/=2;
-    for(Data_Set_Size+=(Data_Set_Size/2);elapsed<=180;Data_Set_Size=(Data_Set_Size/2)+Data_Set_Size){
+    quat = Data_Set_Size/4;
+    for(Data_Set_Size+=quat;elapsed<=180;Data_Set_Size+=quat){
         if(Data_Set_Size>1000000000){
             break;
         }
