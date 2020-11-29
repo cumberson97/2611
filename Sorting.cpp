@@ -37,7 +37,7 @@ void data_set (int a[],int data_set_size){
 }
 void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
     int i=1;
-
+    elapsed=0;
     cout<<"***Selection Sort***"<<endl;
     for(Data_Set_Size=10000; elapsed<=180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
@@ -52,7 +52,7 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     i=1;
-
+    elapsed=0;
     cout<<endl<<"***Bubble Sort***"<<endl;
     for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
@@ -67,7 +67,7 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     i=1;
-
+    elapsed=0;
     cout<<endl<<"***Insertion In Plcae***"<<endl;
     for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
@@ -82,7 +82,7 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     i=1;
-
+    elapsed=0;
     cout<<endl<<"***MergeSort***"<<endl;
     for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
@@ -97,7 +97,7 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         i++;
     }
     i=1;
-
+    elapsed=0;
     cout<<endl<<"***QuickSort***"<<endl;
     for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
         if(Data_Set_Size>1000000000){
@@ -114,5 +114,82 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
 }
 //Carson
 void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
+    int i=1,full=800000000;
+    elapsed=0;
+    data_set(arr, full);
+    cout<<"***Selection Sort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<=180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
 
+        start = clock();
+        selectionSort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+    elapsed=0;
+    data_set(arr, full);
+    cout<<endl<<"***Bubble Sort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+
+        start = clock();
+        bubbleSort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+    elapsed=0;
+    data_set(arr, full);
+    cout<<endl<<"***Insertion In Plcae***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+
+        start = clock();
+        insertionSort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+    data_set(arr, full);
+    elapsed=0;
+    cout<<endl<<"***MergeSort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        start = clock();
+        mergeSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+    data_set(arr, full);
+    elapsed=0;
+    cout<<endl<<"***QuickSort***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        start = clock();
+        quickSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
 }
