@@ -8,13 +8,14 @@
 
 using namespace std;
 void data_set (int a[],int data_set_size);
-void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end);
-void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end);
+void Unsorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end);
+void Half_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end);
+void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end);
 
 int main () {
 
     static int * array = new int [1000000000];
-    int data_Set_Size=10000;
+    long int data_Set_Size=10000;
     double elapsed;
     int i=1;
 
@@ -22,7 +23,8 @@ int main () {
     elapsed=0;
 
     Unsorted_Data_Test(array,data_Set_Size,elapsed,start,end);
-    Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
+    Half_Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
+    Fully_Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
 
 
     // write code here to perform experiments with the sort algorithms
@@ -40,7 +42,7 @@ void data_set (int a[],int data_set_size){
         a[i]= distribution(generator);
     }
 }
-void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end) {
+void Unsorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end) {
 
     ofstream out;
     out.open("Unsorted Statistics.csv");
@@ -123,8 +125,8 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
 
         i = 1;
         elapsed = 0;
-        cout << "***Insertion In Place***" << endl;
-        out << "Insertion In Place" << endl;
+        cout << "***Insertion Sort***" << endl;
+        out << "Insertion Sort" << endl;
         out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
         out << i << "," << elapsed << "," << Data_Set_Size << endl;
         for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
@@ -319,7 +321,7 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
     }
 }
 
-void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
+void Half_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end){
 
     ofstream out;
     out.open("Sorted Statistics.csv");
@@ -466,4 +468,301 @@ void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,c
         out<<i<<","<<elapsed<<","<<Data_Set_Size<<endl;
         i++;
     }
+}
+
+void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end){
+
+    ofstream out;
+    out.open("Fully Sorted Statistics.csv");
+
+    out << "Fully Sorted Data Test" << endl;
+    data_set(arr,1000000000);
+    cout<<"Array is being sorted test will start shortly...."<<endl<<endl;
+    radixsort(arr,1000000000);
+
+    int i = 1;
+    elapsed = 0;
+
+    cout << "***Selection Sort***" << endl;
+    out << "Selection Sort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+
+    for (Data_Set_Size = 10000; elapsed <= 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+        start = clock();
+        selectionSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    elapsed = 0;
+    Data_Set_Size = (Data_Set_Size / 4);
+    float quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+        start = clock();
+        selectionSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    out << "" << endl;
+
+    i = 1;
+    elapsed = 0;
+    cout << "***Bubble Sort***" << endl;
+    out << "Bubble Sort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+    for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+        start = clock();
+        bubbleSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    elapsed = 0;
+    Data_Set_Size = Data_Set_Size / 4;
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        bubbleSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+        out << "" << endl;
+    }
+    i = 1;
+    elapsed = 0;
+    cout << "***Insertion Sort***" << endl;
+    out << "Insertion Sort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+    out << i << "," << elapsed << "," << Data_Set_Size << endl;
+
+    for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        insertionSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = Data_Set_Size / 4;
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        insertionSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    out << "" << endl;
+
+    i = 1;
+    elapsed = 0;
+    cout << "***MergeSort***" << endl;
+    out << "MergeSort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+
+    for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        mergeSort(arr, 0, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = Data_Set_Size / 4;
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        mergeSort(arr, 0, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    out << "" << endl;
+
+    i = 1;
+    elapsed = 0;
+    cout << "***QuickSort***" << endl;
+    out << "QuickSort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+
+    for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        quickSort(arr, 0, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = Data_Set_Size / 4;
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        quickSort(arr, 0, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    out << "" << endl;
+
+    i = 1;
+    elapsed = 0;
+    cout << "***Maxheap***" << endl;
+    out << "Maxheap" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+
+    for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        heapSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = Data_Set_Size / 4;
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        heapSort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    out << "" << endl;
+
+    i = 1;
+    elapsed = 0;
+    cout << "***RadixSort***" << endl;
+    out << "RadixSort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+
+    for (Data_Set_Size = 10000; elapsed < 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        radixsort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = Data_Set_Size / 4;
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 1000000000) {
+            break;
+        }
+
+        start = clock();
+        radixsort(arr, Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size
+             << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
 }
