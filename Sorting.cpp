@@ -114,10 +114,25 @@ void Unsorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start
         cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
         i++;
     }
+    i=1;
+    elapsed=0;
+    cout<<endl<<"***Maxheap***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        data_set(arr, Data_Set_Size);
+        start = clock();
+        heapSort(arr,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
 }
 //Carson
 void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,clock_t end){
-    int i=1,full=800000000;
+    int i=1,full=1000000000;
     elapsed=0;
     data_set(arr, full);
     cout<<"***Selection Sort***"<<endl;
@@ -190,6 +205,21 @@ void Sorted_Data_Test(int arr[],int Data_Set_Size,double elapsed,clock_t start,c
         }
         start = clock();
         quickSort(arr,0,Data_Set_Size);
+        end = clock();
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
+        i++;
+    }
+    i=1;
+    data_set(arr, full);
+    elapsed=0;
+    cout<<endl<<"***Maxheap***"<<endl;
+    for(Data_Set_Size=10000; elapsed<180;Data_Set_Size*=2) {
+        if(Data_Set_Size>1000000000){
+            break;
+        }
+        start = clock();
+        heapSort(arr,Data_Set_Size);
         end = clock();
         elapsed = double(end - start) / CLOCKS_PER_SEC;
         cout << "Time taken: "<< elapsed <<"   Current run: "<<i<<"  Size of Data Set: "<<Data_Set_Size<<endl;
