@@ -6,11 +6,21 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/liat1/Desktop/2611 group/SortAlgorithms.cpp
-iostream
--
-SortAlgorithms.h
+C:/Users/liat1/Desktop/2611 group/MaxHeap.h
+
 C:/Users/liat1/Desktop/2611 group/SortAlgorithms.h
 
+C:/Users/liat1/Desktop/2611 group/Sorting.cpp
+iostream
+-
+ctime
+-
+random
+-
+fstream
+-
+MaxHeap.h
+C:/Users/liat1/Desktop/2611 group/MaxHeap.h
+SortAlgorithms.h
 C:/Users/liat1/Desktop/2611 group/SortAlgorithms.h
 
