@@ -5,32 +5,37 @@
 
 #include "MaxHeap.h"
 #include "SortAlgorithms.h"
+struct Astruct{
+    int key;
+    int data[100];
+};
 
 using namespace std;
 void data_set (int a[],int data_set_size);
 void Unsorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end);
 void Half_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end);
 void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end);
+void fill_struct(Astruct arr[],int size, int data[],int size_2);
+void test_Struct(Astruct arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end,int data_set[],int size);
 
 int main () {
     static int * array = new int [1000000000];
-    long int data_Set_Size=10000;
-    double elapsed;
-    int i=1;
-
+   // static Astruct * key_array = new Astruct [1000000000];
+    long int data_Set_Size=10000,size=100;
+    int data[100];
+    data_set(data,size);
+    double elapsed=0;
     clock_t start, end;
-    elapsed=0;
+
+
 
     Unsorted_Data_Test(array,data_Set_Size,elapsed,start,end);
     Half_Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
     Fully_Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
-
-
     // write code here to perform experiments with the sort algorithms
 
     return 0;
 }
-
 
 void data_set (int a[],int data_set_size){
     mt19937_64 generator(time(0));
@@ -39,11 +44,10 @@ void data_set (int a[],int data_set_size){
     for (  i=1; i < data_set_size; i++){
         a[i]= distribution(generator);
     }
-
 }
 
 void Unsorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end) {
-
+    cout<<"Unsorted Data"<<endl<<endl;
     ofstream out;
     out.open("Unsorted Statistics.csv");
 
@@ -320,9 +324,8 @@ void Unsorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t 
     }
 }
 
-
 void Half_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end){
-
+    cout<<"Half Sorted Data"<<endl<<endl;
     ofstream out;
     out.open("Sorted Statistics.csv");
 
@@ -471,7 +474,7 @@ void Half_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock
 }
 
 void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end){
-
+    cout<<"Fully sorted DAta"<<endl<<endl;
     ofstream out;
     out.open("Fully Sorted Statistics.csv");
 
@@ -730,4 +733,20 @@ void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,cloc
         i++;
     }
 
+}
+
+void test_Struct(Astruct arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end,int data_set[],int size){
+
+}
+
+void fill_struct(Astruct arr[],int size,int data[],int size_2){
+    mt19937_64 generator(time(0));
+    uniform_int_distribution<long long unsigned>distribution(0,1000000000);
+    long long int i=0;
+    for (  i=1; i < size; i++){
+        arr[i].key= distribution(generator);
+        for(int j=0;j<size_2;j++){
+            arr[i].data[j]=data[j];
+        }
+    }
 }
