@@ -1,14 +1,12 @@
 #include <iostream>
 #include <ctime>
+#include <cstdlib>
 #include <random>
 #include <fstream>
 
 #include "MaxHeap.h"
 #include "SortAlgorithms.h"
-struct Astruct{
-    int key;
-    int data[100];
-};
+
 
 using namespace std;
 void data_set (int a[],int data_set_size);
@@ -20,7 +18,8 @@ void test_Struct(Astruct arr[],long int Data_Set_Size,double elapsed,clock_t sta
 
 int main () {
     static int * array = new int [1000000000];
-   // static Astruct * key_array = new Astruct [1000000000];
+
+    Astruct * key_array = new Astruct [50000000];
     long int data_Set_Size=10000,size=100;
     int data[100];
     data_set(data,size);
@@ -32,6 +31,7 @@ int main () {
     Unsorted_Data_Test(array,data_Set_Size,elapsed,start,end);
     Half_Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
     Fully_Sorted_Data_Test(array,data_Set_Size,elapsed,start,end);
+    test_Struct(key_array,data_Set_Size,elapsed,start,end,data,size);
     // write code here to perform experiments with the sort algorithms
 
     return 0;
@@ -54,7 +54,7 @@ void Unsorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,clock_t 
     out << "Unsorted Data Test" << endl;
 
     int i = 1;
-    elapsed = 0;
+     elapsed = 0;
     cout << "***Selection Sort***" << endl;
     out << "Selection Sort" << endl;
     out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
@@ -521,6 +521,7 @@ void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,cloc
         i++;
     }
 
+
     out << "" << endl;
 
     i = 1;
@@ -735,7 +736,165 @@ void Fully_Sorted_Data_Test(int arr[],long int Data_Set_Size,double elapsed,cloc
 
 }
 
-void test_Struct(Astruct arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end,int data_set[],int size){
+void test_Struct(Astruct arr[],long int Data_Set_Size,double elapsed,clock_t start,clock_t end,int data_set1[],int size){
+    cout<<"Unsorted Data Struct"<<endl<<endl;
+    ofstream out;
+    out.open("Struct Unsorted Statistics.csv");
+
+    out << "Unsorted Data Test struct" << endl;
+    int j=0;
+    int i = 1;
+    elapsed = 0;
+    cout << "***Quick Sort***" << endl;
+    out << "Quick Sort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 60000000) {
+            break;
+        }
+
+        fill_struct(arr, Data_Set_Size,data_set1,size);
+
+        start = clock();
+        SquickSort(arr,0, Data_Set_Size);
+
+        while(j<Data_Set_Size){
+            quickSort(arr[j].data,0,size);
+            j++;
+        }
+
+        end = clock();
+        j=0;
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+    elapsed = 0;
+    Data_Set_Size = (Data_Set_Size / 4);
+    float quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 60000000) {
+            break;
+        }
+        fill_struct(arr, Data_Set_Size,data_set1,size);
+        start = clock();
+        SquickSort(arr,0, Data_Set_Size);
+        while(j<Data_Set_Size){
+            quickSort(arr[j].data,0,size);
+            j++;
+        }
+        end = clock();
+        j=0;
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    out << "" << endl;
+
+    elapsed = 0;
+    i = 1;
+    cout << "***Radix Sort***" << endl;
+    out << "Radix Sort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 50000000) {
+            break;
+        }
+        fill_struct(arr, Data_Set_Size,data_set1,size);
+        start = clock();
+        Sradixsort(arr, Data_Set_Size);
+        while(j<Data_Set_Size){
+            radixsort(arr[j].data,size);
+            j++;
+        }
+        end = clock();
+        j=0;
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = (Data_Set_Size / 4);
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 50000000) {
+            break;
+        }
+        fill_struct(arr, Data_Set_Size,data_set1,size);
+        start = clock();
+        Sradixsort(arr, Data_Set_Size);
+        while(j<Data_Set_Size){
+            radixsort(arr[j].data,size);
+            j++;
+        }
+        end = clock();
+        j=0;
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    out << "" << endl;*/
+
+    elapsed = 0;
+    i = 1;
+    cout << "***Merge Sort***" << endl;
+    out << "Merge Sort" << endl;
+    out << "Current Run" << "," << "Time Taken" << "," << "Size of Data Set" << "," << endl;
+    for (Data_Set_Size = 10000; elapsed <= 180; Data_Set_Size *= 2) {
+        if (Data_Set_Size > 50000000) {
+            break;
+        }
+        fill_struct(arr, Data_Set_Size,data_set1,size);
+        start = clock();
+        SmergeSort(arr,0, Data_Set_Size);
+        /*while(j<Data_Set_Size){
+            mergeSort(arr[j].data,0,size);
+            j++;
+        }*/
+        end = clock();
+        j=0;
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    elapsed = 0;
+    Data_Set_Size = (Data_Set_Size / 4);
+    quat = Data_Set_Size / 4;
+    Data_Set_Size = Data_Set_Size + quat;
+    for (Data_Set_Size = Data_Set_Size; elapsed <= 180; Data_Set_Size += quat) {
+        if (Data_Set_Size > 50000000) {
+            break;
+        }
+        fill_struct(arr, Data_Set_Size,data_set1,size);
+        start = clock();
+        SmergeSort(arr,0, Data_Set_Size);
+        /*while(j<Data_Set_Size){
+            mergeSort(arr[j].data,0,size);
+            j++;
+        }*/
+        end = clock();
+        j=0;
+        elapsed = double(end - start) / CLOCKS_PER_SEC;
+        cout << "Time taken: " << elapsed << "   Current run: " << i << "  Size of Data Set: " << Data_Set_Size << endl;
+        out << i << "," << elapsed << "," << Data_Set_Size << endl;
+        i++;
+    }
+
+    out << "" << endl;
+
+    i = 1;
 
 }
 
